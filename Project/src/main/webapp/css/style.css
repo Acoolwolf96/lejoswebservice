@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+body, html {
+	font-family: Arial, sans-serif;
+	text-align: center;
+	padding: 20px;
+}
+
+.container {
+	width: 300px;
+	margin: 0 auto;
+}
+
+.slider-container {
+	margin: 15px 0;
+}
+
+input[type="range"] {
+	width: 80%;
+}
+
+button {
+	width: 100px;
+	padding: 10px;
+	margin: 5px;
+	font-size: 16px;
+}
+
+#startButton {
+	background-color: green;
+	color: white;
+}
+
+#stopButton {
+	background-color: red;
+	color: white;
+}
