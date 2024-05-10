@@ -35,3 +35,20 @@ public class RobotDataHandler {
         }
         return null;
     }
+
+    private void sendDataToRobot(LejosData data) {
+        NXTConnector conn = new NXTConnector();
+
+
+
+        conn.addLogListener(new NXTCommLogListener() {
+            public void logEvent(String message) {
+                System.out.println("Log.listener: " + message);
+            }
+
+            public void logEvent(Throwable throwable) {
+                System.out.println("Log.listener - stack trace: ");
+                throwable.printStackTrace();
+            }
+        });
+
