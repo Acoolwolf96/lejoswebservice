@@ -1,6 +1,7 @@
 package services;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,21 +26,26 @@ public class Project {
 
 	@GET
 	@Path("/readall")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<LejosData> readAll() {
-		List<LejosData> dataList = new ArrayList<>();
+	@Produces(MediaType.TEXT_PLAIN)
+	public String readAll() {
+		StringBuilder response = new StringBuilder();
 		String sql = "SELECT leftMotor, rightMotor, securityDistance, lineColor FROM lejos_data";
 		try (Connection conn = Connections.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				ResultSet rs = stmt.executeQuery()) {
 			while (rs.next()) {
-				dataList.add(new LejosData(rs.getInt("leftMotor"), rs.getInt("rightMotor"),
-						rs.getInt("securityDistance"), rs.getInt("lineColor")));
+				if (response.length() > 0) {
+					response.append(", "); // Separate entries by comma if needed
+				}
+				// Include all values separated by commas
+				response.append(rs.getInt("leftMotor")).append(",").append(rs.getInt("rightMotor")).append(",")
+						.append(rs.getInt("securityDistance")).append(",").append(rs.getInt("lineColor"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace(); // Proper error handling or logging should be added here
+			return "Error processing request"; // Returning an error message if there's an exception
 		}
-		return dataList;
+		return response.toString();
 	}
 
 	@POST
@@ -82,7 +88,7 @@ public class Project {
 						rs.getInt("lineColor"));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace(); // Proper error handling or logging should be added here
+			e.printStackTrace(); 
 		}
 		return data;
 	}
