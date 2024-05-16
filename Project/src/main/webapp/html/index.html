@@ -18,12 +18,16 @@
             <form id="robotForm" method="post" action="/rest/team19/adddata">
                 <label for="leftMotor">Left Motor Speed:</label>
                 <input type="number" id="leftMotor" name="leftMotor" required><br>
+                
                 <label for="rightMotor">Right Motor Speed:</label>
                 <input type="number" id="rightMotor" name="rightMotor" required><br>
+                
                 <label for="securityDistance">Security Distance:</label>
                 <input type="number" id="securityDistance" name="securityDistance" required><br>
-                <label for="lineColor">Line Color:</label>
+                
+                <label for="lineColor">Line Color Intensity Threshold:</label>
                 <input type="number" id="lineColor" name="lineColor" required><br>
+                
                 <button type="submit">Submit Data</button>
             </form>
         </section>
@@ -38,6 +42,7 @@
 
         <section class="statistics">
             <h2>Data Statistics</h2>
+            <div>Line Value: <span id="lineValueDisplay">--</span></div>
             <button onclick="fetchAllData()">Fetch Data Statistics</button>
             <div id="dataDisplay"> <!-- Data will be displayed here --></div>
         </section>
