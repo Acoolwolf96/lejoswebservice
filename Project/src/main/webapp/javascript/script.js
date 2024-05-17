@@ -1,5 +1,5 @@
 document.getElementById('robotForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault();
     const formData = new FormData(this);
     fetch(this.action, {
         method: 'POST',
@@ -8,25 +8,35 @@ document.getElementById('robotForm').addEventListener('submit', function(event) 
     .then(data => {
         console.log('Success:', data);
         alert('Data submitted successfully');
-        fetchAllData(); // Optionally refresh data statistics after submission
+        fetchAllData(); 
     }).catch(error => {
         console.error('Error:', error);
     });
 });
 
-function fetchAllData() {
-    console.log('Fetching data...');
-    fetch('/rest/team19/readall')
-    .then(response => response.json())
-    .then(data => {
-        const html = data.map(item => `<div>${item.leftMotor}, ${item.rightMotor}, ${item.securityDistance}, ${item.lineColor}</div>`).join('');
-        document.getElementById('dataDisplay').innerHTML = html;
-    }).catch(error => {
-        console.error('Error fetching data:', error);
-    });
-}
 
-function sendCommand(command) {
-    console.log('Sending command:', command);
-    // Implement command sending logic here
-}
+
+document.getElementById('fetchDataBtn').addEventListener('click', function() {
+    fetch('http://172.20.10.7:8080/rest/team19/latestData')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const dataDiv = document.getElementById('data');
+            dataDiv.innerHTML = `
+                <p>Left Motor: ${data.leftMotor}</p>
+                <p>Right Motor: ${data.rightMotor}</p>
+                <p>Security Distance: ${data.securityDistance}</p>
+                <p>Line Color: ${data.lineColor}</p>
+            `;
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            document.getElementById('data').innerHTML = `
+                <p>Error fetching data: ${error.message}</p>
+            `;
+        });
+});
