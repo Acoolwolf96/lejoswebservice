@@ -18,7 +18,7 @@ public class Connection implements Runnable {
         while (dataExchange.getLooping()) {
             HttpURLConnection conn = null;
             try {
-                URL url = new URL("http://10.0.0.34:8080/rest/team19/lejosdata/5");
+                URL url = new URL("http://172.20.10.7:8080/rest/team19/lejosdata/5");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setConnectTimeout(5000);

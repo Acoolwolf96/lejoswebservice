@@ -15,19 +15,21 @@ public class Main {
     private static linefollower car = new linefollower(DE);
     private static ColorSensor ref = new ColorSensor(DE);
     private static ObstacleAvoid obj = new ObstacleAvoid(DE);
+    private static data.SendData snd = new data.SendData(DE);
  
     private static data.Connection conn = new data.Connection(DE);
 
     public static void main(String[] args) {
         Thread connThread = new Thread(conn, "ConnectionThread");
-        Thread carThread = new Thread(car, "linefollowerThread");
-        Thread refThread = new Thread(ref, "ColorSensorThread");
-        Thread objThread = new Thread(obj, "ObstacleAvoidThread");
-
+        Thread sndThread = new Thread(snd, "sendDataThread");
+        Thread carThread = new Thread(car, "carThread");
+        
         carThread.start();
-        refThread.start();
-        objThread.start();
+        ref.start();
+        obj.start();
+        sndThread.start();
         connThread.start();
+        
 
         
         while (Button.ESCAPE.isUp()) {
@@ -42,9 +44,10 @@ public class Main {
 
         try {
             carThread.join();
-            refThread.join();
-            objThread.join();
+            ref.join();
+            obj.join();
             connThread.join();
+            sndThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace(); 
         }
