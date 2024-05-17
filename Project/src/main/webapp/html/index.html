@@ -1,53 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team 19 Robot Data</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team 19 Robot Data</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Robot Control Panel</h1>
-        </header>
+	<div class="container">
+		<header>
+			<h1>Robot Control Panel</h1>
+		</header>
 
-        <section class="data-entry">
-            <h2>Enter Robot Data</h2>
-            <form id="robotForm" method="post" action="/rest/team19/adddata">
-                <label for="leftMotor">Left Motor Speed:</label>
-                <input type="number" id="leftMotor" name="leftMotor" required><br>
-                
-                <label for="rightMotor">Right Motor Speed:</label>
-                <input type="number" id="rightMotor" name="rightMotor" required><br>
-                
-                <label for="securityDistance">Security Distance:</label>
-                <input type="number" id="securityDistance" name="securityDistance" required><br>
-                
-                <label for="lineColor">Line Color Intensity Threshold:</label>
-                <input type="number" id="lineColor" name="lineColor" required><br>
-                
-                <button type="submit">Submit Data</button>
-            </form>
-        </section>
+		<section class="data-entry">
+			<h2>Enter Robot Data</h2>
+			<form id="robotForm" method="post" action="/rest/team19/adddata">
+				<label for="leftMotor">Left Motor Speed:</label> <input
+					type="number" id="leftMotor" name="leftMotor" required><br>
 
-        <section class="controls">
-            <h2>Robot Controls</h2>
-            <button onclick="sendCommand('start')">Start</button>
-            <button onclick="sendCommand('stop')">Stop</button>
-            <button onclick="sendCommand('pause')">Pause</button>
-            <button onclick="sendCommand('resume')">Resume</button>
-        </section>
+				<label for="rightMotor">Right Motor Speed:</label> <input
+					type="number" id="rightMotor" name="rightMotor" required><br>
 
-        <section class="statistics">
-            <h2>Data Statistics</h2>
-            <div>Line Value: <span id="lineValueDisplay">--</span></div>
-            <button onclick="fetchAllData()">Fetch Data Statistics</button>
-            <div id="dataDisplay"> <!-- Data will be displayed here --></div>
-        </section>
+				<label for="securityDistance">Security Distance:</label> <input
+					type="number" id="securityDistance" name="securityDistance"
+					required><br> <label for="lineColor">Line
+					Color Intensity Threshold:</label> <input type="number" id="lineColor"
+					name="lineColor" required><br>
 
-        <script src="../javascript/script.js"></script>
-    </div>
+				<button type="submit">Submit Data</button>
+			</form>
+		</section>
+
+		<h1>Robot Data Example</h1>
+		<button id="fetchDataBtn">Fetch Data</button>
+		<div id="data">
+		</div>
+
+		<script src="../javascript/script.js"></script>
+	</div>
 </body>
 </html>
